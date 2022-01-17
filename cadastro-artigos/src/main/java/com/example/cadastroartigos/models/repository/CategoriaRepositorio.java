@@ -1,5 +1,9 @@
 package com.example.cadastroartigos.models.repository;
 
-public interface CategoriaRepositorio {
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import com.example.cadastroartigos.models.entities.Categoria;
+
+public interface CategoriaRepositorio extends PagingAndSortingRepository<Categoria, Integer>{
 
 }
