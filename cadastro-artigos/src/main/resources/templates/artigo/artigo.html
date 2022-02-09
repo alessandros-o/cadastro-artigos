@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width" />
+<title>Lista de Convidados</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+rel="stylesheet"/>
+<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}"
+rel="stylesheet"/>
+</head>
+<body>
+   <div class="panel panel-default" style="margin: 10px">
+     <div class="panel-heading">
+		<h1 class="panel-title">Upload de Documentos</h1>
+		<a th:href="@{/cadastroUsuario}"><button class="btn btn-primary">Voltar p/ Cadastro de Usuários e Artigos</button></a>
+	</div>
+     <form class="form-inline" method="post" 
+     		encType="multipart/form-data" style="margin: 20px 0">
+     	<div class="form-group">
+       		<input type="file" name="files" multiple required />
+       		<div class="form-floating" style="margin: 20px 0">
+    			<select id="selectCategoria" class="form-select" name="categorias" style="width: 30%">
+        			<option>Nenhuma categoria selecionada</option>
+        			<option th:each="categorias : ${categorias}" 
+          					th:value="${categorias.id}"
+          					th:text="${categorias.nomeCategoria}"/>
+    			</select>
+    			<label for="selectCategoria">Categoria do Artigo</label>
+			</div>
+			<button type="submit" class="btn btn-primary">Adicionar</button>
+      	</div>
+      	
+     </form>
+     
+     <div th:each="usuario:${usuario}" class="container">
+		<div>
+			<p>Id Usuário: <span th:text="${usuario.Id}"></span></p>
+			<p>Nome Usuário: <span th:text="${usuario.nome}"></span></p>
+		</div>     
+       
+     </div>
+
+   </div>
+   
+   <div class="panel-body" style="margin: 20px">
+     <h3>Lista de Artigos</h3>
+     <table class="table">
+       <thead>
+         <tr>
+           <th>Id</th>
+           <th>Nome</th>
+            <th>Categoria</th>
+           <th>ID Usuario</th>
+           <th>Download Link</th>
+           <th>Deletar</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr th:each="artigos:${artigos}">
+           <td th:text="${artigos.Id}" />
+           <td th:text="${artigos.titulo}"/>
+           <td th:text="${artigos.categorias}"/>
+           <td th:text="${artigos.usuario.id}"/>
+           <td><a th:href="@{'/downloadFile/'+${artigos.id}}">Download</a></td>
+           <td><a th:href="${(#mvc.url('AC#excluirArtigo').arg(0, artigos.id)).build()}"><button class="btn btn-primary">delete</button></a></td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+
+</body>
+</html>

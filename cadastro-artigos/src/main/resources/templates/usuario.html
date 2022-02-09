@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Cadastro Usuários</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+</head>
+<body>
+	<div class="panel panel-default" style="margin: 20px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Cadastro de Usuários</h1>
+			<a th:href="@{/}"><button class="btn btn-primary">Voltar p/ Principal</button></a>
+		</div>
+		<form class="form-inline" id="cadastroUsuario" name="cadastroUsuario"
+			method="post" th:action=@{/cadastroUsuario} style="margin: 20px 0">
+			<div class="form-group">
+			<input type="text" name="Nome" placeholder="Nome" style="width: 30%" />
+			<button type="submit" class="btn btn-primary">Cadastrar</button>
+			</div>
+		</form>
+	</div>
+
+	<div class="panel-body" style="margin: 20px">
+		<h3>Lista de Usuários</h3>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nome</th>
+					<th>Deletar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="usuario:${usuario}">
+					<td><span th:text="${usuario.Id}"></span></td>
+					<td><a
+						th:href="${(#mvc.url('UC#cadArtigoUse').arg(0, usuario.id)).build()}"><span
+							th:text="${usuario.nome}"></span></a></td>
+					<td><a th:href="${(#mvc.url('UC#excluirUsuario').arg(0, usuario.id)).build()}"><button class="btn btn-primary">delete</button></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>

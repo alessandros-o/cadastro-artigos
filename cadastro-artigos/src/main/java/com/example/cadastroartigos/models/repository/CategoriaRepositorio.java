@@ -1,9 +1,13 @@
 package com.example.cadastroartigos.models.repository;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.cadastroartigos.models.entities.Categoria;
 
-public interface CategoriaRepositorio extends PagingAndSortingRepository<Categoria, Integer>{
-
+@Repository
+@Transactional
+public interface CategoriaRepositorio extends CrudRepository<Categoria, Integer>{
+	Categoria findById(int id);
 }

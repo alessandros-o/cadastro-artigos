@@ -1,39 +1,44 @@
 package com.example.cadastroartigos.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cadastroartigos.models.entities.Categoria;
 import com.example.cadastroartigos.models.repository.CategoriaRepositorio;
 
-@RestController
-@RequestMapping("/api/categoria")
+@Controller
 public class CategoriaController {
 	
 	@Autowired
 	private CategoriaRepositorio categoriaRepositorio;
 	
-	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
-	public @ResponseBody Categoria salvarCategoria(@Validated Categoria categoria) {
+	
+	@GetMapping("/categorias")
+	public String obterCategoria(Categoria categoria, Model model){
+		List<Categoria> categorias = (List<Categoria>) categoriaRepositorio.findAll();
+		model.addAttribute("categorias", categorias);
+		return "categoria/categoria";
+	}
+	
+	
+	@PostMapping("/cadastroCategoria")
+	public String salvarCategoria(Categoria categoria) {
 		categoriaRepositorio.save(categoria);
-		return categoria;
+		return "redirect:/categorias";
 	}
 	
-	@GetMapping
-	public Iterable<Categoria> obterCategoria(){
-		return categoriaRepositorio.findAll();
+	@RequestMapping("/deletarCategoria")
+	public String excluirCategoria(int id) {
+		Categoria categoria = categoriaRepositorio.findById(id);
+		categoriaRepositorio.delete(categoria);
+		return "redirect:/categorias";
 	}
 	
-	@DeleteMapping(path = "/{id}")
-	public void excluirCategoria(@PathVariable int id) {
-		categoriaRepositorio.deleteById(id);
-	}
 
 }

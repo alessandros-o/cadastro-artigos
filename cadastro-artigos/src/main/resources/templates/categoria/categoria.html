@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Cadastro Categorias</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+</head>
+<body>
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Cadastro de Categorias</h1>
+			<a th:href="@{/}"><button class="btn btn-primary">Voltar p/ Principal</button></a>
+		</div>
+		<form class="form-inline" id="cadastroCategoria" name="cadastroCategoria"
+			method="post" th:action=@{/cadastroCategoria} style="margin: 20px 0">
+			<input type="text" name="nomeCategoria" placeholder="Categoria" style="width: 30%"/>
+			<button type="submit" class="btn btn-primary">Cadastrar</button>
+		</form>
+	</div>
+
+	<div class="panel-body" style="margin: 20px">
+		<h3>Lista de Categorias</h3>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nome Categoria</th>
+					<th>Deletar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="categoria:${categorias}">
+					<td><span th:text="${categoria.Id}"></span></td>
+					<td><span th:text="${categoria.nomeCategoria}"></span></td>
+					<td><a
+						th:href="${(#mvc.url('CC#excluirCategoria').arg(0, categoria.id)).build()}"><button class="btn btn-primary">delete</button></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>

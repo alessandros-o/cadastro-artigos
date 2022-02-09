@@ -1,26 +1,28 @@
 package com.example.cadastroartigos.models.entities;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Artigo {
 	
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
-	@Column(nullable = false)
 	private String titulo;
+	
+	private String docType;
+	
+	@Lob
+	private byte[] data;
 	
 	@ManyToOne
 	private Usuario usuario;
@@ -28,52 +30,28 @@ public class Artigo {
 	@ManyToOne
 	private Categoria categoria;
 	
+	private String categorias;
+		
 	public Artigo() {
 		
 	}
+
 	
-	public Artigo(String titulo, Usuario usuario, Categoria categoria) {
+
+	public Artigo(String titulo, String docType, byte[] data, Usuario usuario, Categoria categoria) {
 		super();
 		this.titulo = titulo;
-		this.usuario = usuario;
-		this.categoria = categoria;
+		this.docType = docType;
+		this.data = data;
+		setUsuario(usuario);
+		setCategoria(categoria);
 	}
 
-
-	public void upload(String pasta, String nomeDoArquivo, InputStream arquivoCarregado) {
-		
-		String caminhoArquivo = pasta + "/" + nomeDoArquivo;
-		File novoArquivo = new File(caminhoArquivo);
-		
-		try {
-			FileOutputStream saida = new FileOutputStream(novoArquivo);
-			copiar(arquivoCarregado, saida);
-		} catch (Exception e) {
-			
-		}
-		
-	}
-	
-	public void copiar(InputStream origem, OutputStream destino) {
-		int bite = 0; 
-		byte[] tamanhoMaximo = new byte[1024 * 8];
-		
-		try {
-			while((bite = origem.read(tamanhoMaximo)) >= 0) {
-				destino.write(tamanhoMaximo, 0, bite);
-			}
-			
-		} catch (Exception e) {
-			
-		}
-		
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -99,9 +77,33 @@ public class Artigo {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+		if(categoria != null && this.categorias == null) {
+			this.setCategorias(categoria.getNomeCategoria());
+		}
+	}
+
+	public String getDocType() {
+		return docType;
+	}
+
+	public void setDocType(String docType) {
+		this.docType = docType;
+	}
+
+	public byte[] getData() {
+		return data;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
 	}
 	
-	
-	
+	public String getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(String categorias) {
+		this.categorias = categorias;
+	}
 
 }
