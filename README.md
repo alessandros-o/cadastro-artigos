@@ -16,6 +16,7 @@
 * Cada categoria pode ter vários arquivos
 * Em cada entidade foi incluída a função de *deletar* (tanto usuário, quanto arquivo e categoria)
 * Na tela da *Upload de arquivos* foi utilizado um *Dropdown List* sendo alimentado com o banco de dados.
+* ***OBS:*** O código completo do projeto se encontra, por enquanto, na ***branch nova-feature*** pois ainda farei alterações.
 
 ### Telas
 
