@@ -4,7 +4,11 @@
 
 ### Tecnologias utilizadas
 * Linguagem JAVA
-* Spring MVC e Spring Boot
+* Spring MVC
+* Spring Boot
+* Spring Data JPA
+* Thymeleaf
+* Banco de dados H2
 
 ### Funcionalidades
 * Relacionamento entre classes
