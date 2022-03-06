@@ -18,10 +18,19 @@
 
 ### Telas
 
+**Tela Inicial**
 ![Tela Inicial](https://user-images.githubusercontent.com/69283422/156903607-2be3b6e7-9adf-4912-9235-593ac1f437fb.png)
+***
+**Tela de cadastro de categorias**
 ![Cadastro de categorias](https://user-images.githubusercontent.com/69283422/156903681-6cf05c54-6211-4839-a594-411726930801.png)
-![Cadastro de usuários](https://user-images.githubusercontent.com/69283422/156903701-2760a9a3-f35d-4e32-bf3f-23fa581dfa39.png)
-![Upload de arquivos](https://user-images.githubusercontent.com/69283422/156903716-8a35a9af-47bf-4892-a23f-db2d89929a05.png)
+***
+**Tela do usuário para Upload de arquivos**
+![Upload de arquivos](https://user-images.githubusercontent.com/69283422/156904110-f0d04386-abca-4c1b-850f-26b7518427e6.png)
+***
+**Tela de visualização de todos os arquivos com as respectivas categorias e todos os usuários**
+![Visualização de todos os arquivos](https://user-images.githubusercontent.com/69283422/156904118-58fc1ec3-697c-47cc-92a1-b47639c0cecf.png)
+***
+
 
 
 
